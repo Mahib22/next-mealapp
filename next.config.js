@@ -8,9 +8,13 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.themealdb.com",
         port: "",
-        pathname: "/images/media/meals/**",
+        pathname: "/images/**",
       },
     ],
+  },
+
+  env: {
+    base_url: "https://www.themealdb.com/api/json/v1/1",
   },
 };
 
