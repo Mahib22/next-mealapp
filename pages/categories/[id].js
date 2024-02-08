@@ -7,7 +7,7 @@ import GetData from "@/utils/GetData";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function IngredientDetail() {
+export default function CategoryDetail() {
   const { query, isReady } = useRouter();
   const { id } = query;
   const [name, setName] = useState("");
@@ -16,26 +16,25 @@ export default function IngredientDetail() {
     if (isReady) setName(id);
   }, [isReady, id]);
 
-  const formattedName = name.replace(/-/g, " ");
-  const title = `List meals from ${formattedName}`;
+  const title = `List meals from ${name}`;
 
   return (
     <Layout title={title}>
       <ListLayout title={title}>
-        <FetchData name={formattedName} />
+        <FetchData name={name} />
       </ListLayout>
     </Layout>
   );
 }
 
 function FetchData({ name }) {
-  const endpoint = `filter.php?i=${name}`;
+  const endpoint = `filter.php?c=${name}`;
   const { data, error, isLoading } = GetData(endpoint);
 
   if (error) return <Error />;
   if (isLoading) return <Loader />;
 
-  return data.meals.map((item, index) => (
+  return data.meals?.map((item, index) => (
     <MenuItem
       key={index}
       id={item.idMeal}

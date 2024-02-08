@@ -5,8 +5,8 @@ import ListLayout from "@/components/ListLayout";
 import Loader from "@/components/Loader";
 import GetData from "@/utils/GetData";
 
-export default function Ingredient() {
-  const title = "List of ingredients available";
+export default function Area() {
+  const title = "List of area available";
 
   return (
     <Layout title={title}>
@@ -18,7 +18,7 @@ export default function Ingredient() {
 }
 
 function FetchData() {
-  const { data, isLoading, error } = GetData("list.php?i=");
+  const { data, isLoading, error } = GetData("list.php?a=");
 
   if (error) return <Error />;
   if (isLoading) return <Loader />;
@@ -26,9 +26,9 @@ function FetchData() {
   return data.meals.map((item, index) => (
     <CardItem
       key={index}
-      title={item.strIngredient}
-      desc={item.strDescription}
-      pages="ingredients"
+      title={item.strArea}
+      desc={`List of foods from ${item.strArea}`}
+      pages="area"
     />
   ));
 }

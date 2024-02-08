@@ -6,7 +6,7 @@ export default function MenuItem({ id, title, img, pages }) {
     <div className="lg:w-1/4 md:w-1/2 w-full p-4 grid justify-items-center">
       <Link
         href={`/${pages}/${id}`}
-        className="w-48 rounded-full overflow-hidden"
+        className="w-48 h-48 rounded-full overflow-hidden"
       >
         <Image
           width={200}

@@ -1,15 +1,15 @@
-import GetDataIngredient from "@/utils/GetDataIngredient";
+import GetData from "@/utils/GetData";
 import CardItem from "./CardItem";
 import Error from "./Error";
 import Loader from "./Loader";
 
 export default function IngredientList() {
-  const { dataIngredient, isLoading, isError } = GetDataIngredient();
+  const { data, isLoading, error } = GetData("list.php?i=");
 
-  if (isError) return <Error />;
+  if (error) return <Error />;
   if (isLoading) return <Loader />;
 
-  return dataIngredient.meals
+  return data.meals
     .slice(0, 4)
     .map((item, index) => (
       <CardItem

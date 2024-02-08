@@ -1,36 +1,36 @@
 import Image from "next/image";
 import Layout from "@/components/Layout";
 import Loader from "@/components/Loader";
-import useSWR from "swr";
 import { useRouter } from "next/router";
 import Error from "@/components/Error";
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import GetData from "@/utils/GetData";
+import Link from "next/link";
 
 export default function DetailMeals() {
   const router = useRouter();
-
-  const { data, error, isLoading } = useSWR(
-    `${process.env.base_url}/lookup.php?i=${router.query.id}`,
-    fetcher
-  );
+  const endpoint = `lookup.php?i=${router.query.id}`;
+  const { data, error, isLoading } = GetData(endpoint);
 
   if (error) return <Error />;
   if (isLoading) return <Loader />;
 
   const dataMeals = data.meals[0];
-
   const instructionsList = dataMeals.strInstructions.split("\r\n");
 
   return (
     <Layout title={dataMeals.strMeal}>
-      <div className="pt-12">
-        <h1 className="font-bold text-2xl">{dataMeals.strMeal}</h1>
+      <div className="pt-8">
+        <h1 className="font-bold text-4xl">{dataMeals.strMeal}</h1>
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <Image src="/map-pin.svg" alt="map icon" width={15} height={15} />
-            <span className="text-sm">{dataMeals.strArea}</span>
+            <Link
+              href={`/area/${dataMeals.strArea.toLowerCase()}`}
+              className="text-blue-600 underline text-sm"
+            >
+              {dataMeals.strArea}
+            </Link>
           </div>
 
           <div className="flex items-center gap-2">

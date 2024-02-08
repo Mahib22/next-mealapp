@@ -1,15 +1,10 @@
-import useSWR from "swr";
 import Error from "./Error";
 import Loader from "./Loader";
 import MenuItem from "./MenuItem";
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import GetData from "@/utils/GetData";
 
 export default function CategoryList() {
-  const { data, error, isLoading } = useSWR(
-    `${process.env.base_url}/categories.php`,
-    fetcher
-  );
+  const { data, error, isLoading } = GetData("categories.php");
 
   if (error) return <Error />;
   if (isLoading) return <Loader />;
@@ -19,7 +14,7 @@ export default function CategoryList() {
     .map((item, index) => (
       <MenuItem
         key={index}
-        id={item.idCategory}
+        id={item.strCategory.toLowerCase()}
         title={item.strCategory}
         img={item.strCategoryThumb}
         pages="categories"

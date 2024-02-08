@@ -1,15 +1,10 @@
-import useSWR from "swr";
 import CardItem from "./CardItem";
 import Error from "./Error";
 import Loader from "./Loader";
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import GetData from "@/utils/GetData";
 
 export default function AreaList() {
-  const { data, error, isLoading } = useSWR(
-    `${process.env.base_url}/list.php?a=`,
-    fetcher
-  );
+  const { data, error, isLoading } = GetData("list.php?a=");
 
   if (error) return <Error />;
   if (isLoading) return <Loader />;
