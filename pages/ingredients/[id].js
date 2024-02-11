@@ -35,7 +35,7 @@ function FetchData({ name }) {
   if (error) return <Error />;
   if (isLoading) return <Loader />;
 
-  return data.meals.map((item, index) => (
+  return data.meals?.map((item, index) => (
     <MenuItem
       key={index}
       id={item.idMeal}

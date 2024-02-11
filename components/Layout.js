@@ -8,7 +8,7 @@ export default function Layout(props) {
   return (
     <main className={`${inter.className}`}>
       <Head>
-        <title>{props.title}</title>
+        <title>{`${props.title} - ${process.env.app_name}`}</title>
       </Head>
 
       <div className="container px-5 mx-auto">

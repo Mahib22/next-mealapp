@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="flex justify-between items-center flex-col md:flex-row pt-4">
       <Link href={"/"} className="uppercase font-bold text-xl">
-        mealapp
+        {process.env.app_name}
       </Link>
 
       <div className="flex items-center gap-4 md:gap-8 pt-4 md:pt-0">

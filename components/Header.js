@@ -13,12 +13,14 @@ export default function Header() {
           harmonious dining experience for every palate.
         </p>
 
-        <div className="flex justify-center md:justify-start gap-4 pb-16 md:pb-0">
+        <div className="flex flex-col md:flex-row gap-2 pb-16 md:pb-0">
+          <input
+            type="text"
+            placeholder="Search a meal..."
+            className="bg-gray-100 rounded border bg-opacity-50 border-gray-300 focus:ring-2 focus:ring-green-200 focus:bg-transparent focus:border-green-500 outline-none py-2 px-3 transition-colors duration-200 ease-in-out"
+          />
           <button className="text-white bg-green-500 border-0 py-2 px-8 hover:bg-green-600 rounded text-lg font-medium">
-            Button
-          </button>
-          <button className="text-gray-700 bg-gray-200 border-0 py-2 px-8 hover:bg-gray-300 rounded text-lg font-medium">
-            Button
+            Search
           </button>
         </div>
       </div>
