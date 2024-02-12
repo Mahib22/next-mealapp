@@ -21,26 +21,29 @@ export default function AreaDetail() {
   return (
     <Layout title={title}>
       <ListLayout title={title}>
-        <FetchData name={name} />
+        <RenderView name={name} />
       </ListLayout>
     </Layout>
   );
 }
 
-function FetchData({ name }) {
+function RenderView({ name }) {
   const endpoint = `filter.php?a=${name}`;
-  const { data, error, isLoading } = GetData(endpoint);
+  const { data, isLoading } = GetData(endpoint);
 
-  if (error) return <Error />;
   if (isLoading) return <Loader />;
 
-  return data.meals?.map((item, index) => (
-    <MenuItem
-      key={index}
-      id={item.idMeal}
-      title={item.strMeal}
-      img={item.strMealThumb}
-      pages="meals"
-    />
-  ));
+  return data.meals ? (
+    data.meals.map((item, index) => (
+      <MenuItem
+        key={index}
+        id={item.idMeal}
+        title={item.strMeal}
+        img={item.strMealThumb}
+        pages="meals"
+      />
+    ))
+  ) : (
+    <Error message={`${name} not found`} />
+  );
 }

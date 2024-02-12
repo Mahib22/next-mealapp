@@ -1,35 +1,32 @@
 import Error from "@/components/Error";
+import InputSearch from "@/components/InputSearch";
 import Layout from "@/components/Layout";
 import ListLayout from "@/components/ListLayout";
 import Loader from "@/components/Loader";
 import MenuItem from "@/components/MenuItem";
 import GetData from "@/utils/GetData";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
-export default function IngredientDetail() {
-  const { query, isReady } = useRouter();
-  const { id } = query;
-  const [name, setName] = useState("");
+export default function Search() {
+  const { query } = useRouter();
+  const { s } = query;
 
-  useEffect(() => {
-    if (isReady) setName(id);
-  }, [isReady, id]);
-
-  const formattedName = name.replace(/-/g, " ");
-  const title = `List meals from ${formattedName}`;
+  const title = s ? `Result for ${s}` : "Search a meal";
 
   return (
     <Layout title={title}>
+      <div className="flex justify-center md:justify-end pt-6 md:pt-12">
+        <InputSearch />
+      </div>
       <ListLayout title={title}>
-        <RenderView name={formattedName} />
+        <RenderView searchText={s || ""} />
       </ListLayout>
     </Layout>
   );
 }
 
-function RenderView({ name }) {
-  const endpoint = `filter.php?i=${name}`;
+function RenderView({ searchText }) {
+  const endpoint = `search.php?s=${searchText}`;
   const { data, isLoading } = GetData(endpoint);
 
   if (isLoading) return <Loader />;
@@ -45,6 +42,6 @@ function RenderView({ name }) {
       />
     ))
   ) : (
-    <Error message={`${name} not found`} />
+    <Error message={`${searchText} not found`} />
   );
 }

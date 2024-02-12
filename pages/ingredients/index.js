@@ -1,5 +1,4 @@
 import CardItem from "@/components/CardItem";
-import Error from "@/components/Error";
 import Layout from "@/components/Layout";
 import ListLayout from "@/components/ListLayout";
 import Loader from "@/components/Loader";
@@ -11,16 +10,15 @@ export default function Ingredient() {
   return (
     <Layout title={title}>
       <ListLayout title={title}>
-        <FetchData />
+        <RenderView />
       </ListLayout>
     </Layout>
   );
 }
 
-function FetchData() {
-  const { data, isLoading, error } = GetData("list.php?i=");
+function RenderView() {
+  const { data, isLoading } = GetData("list.php?i=");
 
-  if (error) return <Error />;
   if (isLoading) return <Loader />;
 
   return data.meals.map((item, index) => (

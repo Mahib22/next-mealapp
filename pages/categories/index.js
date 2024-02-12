@@ -1,4 +1,3 @@
-import Error from "@/components/Error";
 import Layout from "@/components/Layout";
 import ListLayout from "@/components/ListLayout";
 import Loader from "@/components/Loader";
@@ -11,16 +10,15 @@ export default function Category() {
   return (
     <Layout title={title}>
       <ListLayout title={title}>
-        <FetchData />
+        <RenderView />
       </ListLayout>
     </Layout>
   );
 }
 
-function FetchData() {
-  const { data, isLoading, error } = GetData("categories.php");
+function RenderView() {
+  const { data, isLoading } = GetData("categories.php");
 
-  if (error) return <Error />;
   if (isLoading) return <Loader />;
 
   return data.categories.map((item, index) => (

@@ -42,7 +42,7 @@ function RenderView({ dataMeals, isError, isLoading }) {
   if (isLoading) return <Loader />;
 
   const instructionsList = dataMeals.strInstructions.split("\r\n");
-  const tags = dataMeals.strTags.split(",");
+  const tags = dataMeals.strTags ? dataMeals.strTags.split(",") : [];
 
   return (
     <div className="pt-4 md:pt-8">
