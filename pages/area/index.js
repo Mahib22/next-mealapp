@@ -1,4 +1,5 @@
 import CardItem from "@/components/CardItem";
+import Error from "@/components/Error";
 import Layout from "@/components/Layout";
 import ListLayout from "@/components/ListLayout";
 import Loader from "@/components/Loader";
@@ -21,12 +22,16 @@ function RenderView() {
 
   if (isLoading) return <Loader />;
 
-  return data.meals.map((item, index) => (
-    <CardItem
-      key={index}
-      title={item.strArea}
-      desc={`List of foods from ${item.strArea}`}
-      pages="area"
-    />
-  ));
+  return data ? (
+    data.meals.map((item, index) => (
+      <CardItem
+        key={index}
+        title={item.strArea}
+        desc={`List of foods from ${item.strArea}`}
+        pages="area"
+      />
+    ))
+  ) : (
+    <Error />
+  );
 }

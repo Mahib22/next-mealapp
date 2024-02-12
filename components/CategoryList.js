@@ -8,7 +8,7 @@ export default function CategoryList() {
 
   if (isLoading) return <Loader />;
 
-  return data.categories ? (
+  return data?.categories ? (
     data.categories
       .slice(0, 4)
       .map((item, index) => (
@@ -21,6 +21,6 @@ export default function CategoryList() {
         />
       ))
   ) : (
-    <Error message={`${name} not found`} />
+    <Error />
   );
 }

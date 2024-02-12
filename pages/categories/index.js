@@ -1,3 +1,4 @@
+import Error from "@/components/Error";
 import Layout from "@/components/Layout";
 import ListLayout from "@/components/ListLayout";
 import Loader from "@/components/Loader";
@@ -21,13 +22,17 @@ function RenderView() {
 
   if (isLoading) return <Loader />;
 
-  return data.categories.map((item, index) => (
-    <MenuItem
-      key={index}
-      id={item.strCategory.toLowerCase()}
-      title={item.strCategory}
-      img={item.strCategoryThumb}
-      pages="categories"
-    />
-  ));
+  return data ? (
+    data.categories.map((item, index) => (
+      <MenuItem
+        key={index}
+        id={item.strCategory.toLowerCase()}
+        title={item.strCategory}
+        img={item.strCategoryThumb}
+        pages="categories"
+      />
+    ))
+  ) : (
+    <Error />
+  );
 }

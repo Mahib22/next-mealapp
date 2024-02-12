@@ -33,7 +33,7 @@ function RenderView({ name }) {
 
   if (isLoading) return <Loader />;
 
-  return data.meals ? (
+  return data?.meals ? (
     data.meals.map((item, index) => (
       <MenuItem
         key={index}

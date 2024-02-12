@@ -8,7 +8,7 @@ export default function IngredientList() {
 
   if (isLoading) return <Loader />;
 
-  return data.meals ? (
+  return data?.meals ? (
     data.meals
       .slice(0, 4)
       .map((item, index) => (
