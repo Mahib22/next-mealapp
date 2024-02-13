@@ -148,7 +148,7 @@ function RenderView({ dataMeals, isError, isLoading }) {
         </ul>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {tags.map((tag, index) => (
           <span key={index} className="bg-green-100 px-3 py-1 rounded-md">
             {tag.trim()}
